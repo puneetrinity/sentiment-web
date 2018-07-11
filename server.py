@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify, make_response
 from info import classify2
 from math import e
-from redis import Redis
 from config import STATS_KEY, HOST, RHOST, RPASS, RPORT
 from cors import crossdomain
 from datetime import datetime
@@ -10,7 +9,6 @@ import json
 app = Flask(__name__)
 app.debug = False
 app.config['MAX_CONTENT_LENGTH'] = (1 << 20) # 1 MB max request size
-conn = Redis(RHOST, RPORT, password=RPASS)
 
 def percentage_confidence(conf):
 	return 100.0 * e ** conf / (1 + e**conf)
